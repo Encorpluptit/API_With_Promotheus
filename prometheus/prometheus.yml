@@ -17,10 +17,16 @@ scrape_configs:
   static_configs:
   - targets:
     - exporter_1:2112
+    labels:
+      owner: 4d365568-d3ac-4880-8403-8d4e2638e008
+      exporter: c9bb3e99-df72-4603-b188-b6f856f0ef9f
+  - targets:
     - exporter_2:2112
     labels:
       owner: 4d365568-d3ac-4880-8403-8d4e2638e008
+      exporter: 8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5
   - targets:
     - exporter_3:2112
     labels:
       owner: 1d149631-4141-4be4-9244-cfd78afbfc57
+      exporter: ba720cfd-33dc-45c8-9879-7038a965ca18

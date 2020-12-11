@@ -4,7 +4,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"math/rand"
+	"math"
 	"net/http"
 	"os"
 	"strconv"
@@ -16,12 +16,13 @@ var (
 		Name: "activity",
 		Help: "activity metric",
 	})
+	seed float64
 )
 
 func createMetrics() {
 	go func() {
 		for {
-			r := rand.Float64() * 100
+			r := math.Sin(float64(time.Now().Unix())/10) + seed
 			activity.Set(r)
 			time.Sleep(1 * time.Second)
 		}
@@ -30,7 +31,7 @@ func createMetrics() {
 
 func main() {
 	s, _ := strconv.Atoi(os.Getenv("RAND_SEED"))
-	rand.Seed(int64(s))
+	seed = float64(s)
 	createMetrics()
 
 	http.Handle("/metrics", promhttp.Handler())
