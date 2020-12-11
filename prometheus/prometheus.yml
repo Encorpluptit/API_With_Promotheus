@@ -1,0 +1,26 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+  external_labels:
+    monitor: 'my-project'
+
+scrape_configs:
+- job_name: 'prometheus'
+  scrape_interval: 5s
+  static_configs:
+  - targets: ['localhost:9090']
+
+
+- job_name: 'deployments'
+  scrape_interval: 1s
+  static_configs:
+  - targets:
+    - exporter_1:2112
+    - exporter_2:2112
+    labels:
+      owner: 4d365568-d3ac-4880-8403-8d4e2638e008
+  - targets:
+    - exporter_3:2112
+    labels:
+      owner: 1d149631-4141-4be4-9244-cfd78afbfc57
