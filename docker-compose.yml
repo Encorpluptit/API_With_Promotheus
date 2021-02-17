@@ -2,6 +2,13 @@ version: '3.8'
 
 volumes:
     prometheus_data: {}
+    api:
+    sqlite:
+
+networks:
+  API-network:
+    driver: bridge
+
 
 services:
   prometheus:
@@ -17,6 +24,8 @@ services:
     ports:
     - 9090:9090
     restart: always
+    networks:
+      - API-network
 
 
   exporter_1:
@@ -39,3 +48,22 @@ services:
     image: exporter
     environment:
       RAND_SEED: 3
+
+  backend-api:
+    container_name: Skillz-backend
+    build: API
+    environment:
+      DB_DRIVER: sqlite
+      GIN_MODE: debug
+      PORT: ${PORT}
+      PROMETHEUS_URL: "prometheus:9090"
+      API_SECRET: ${API_SECRET}
+      DB_NAME: ${DB_SQLITE_NAME}
+    ports:
+      - 8080:${PORT}
+    restart: on-failure
+    volumes:
+      - api:/api
+      - sqlite:/database
+    networks:
+      - API-network

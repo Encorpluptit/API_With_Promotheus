@@ -1,0 +1,557 @@
+{
+	"info": {
+		"_postman_id": "c477776b-5a99-4111-afc1-dd6da7ed9857",
+		"name": "TechnicalTestSkillz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Testing Prometheus",
+			"item": [
+				{
+					"name": "1. Basics",
+					"item": [
+						{
+							"name": "Health",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROMETHEUS_URL}}/-/healthy",
+									"host": [
+										"{{PROMETHEUS_URL}}"
+									],
+									"path": [
+										"-",
+										"healthy"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ready",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROMETHEUS_URL}}/-/ready",
+									"host": [
+										"{{PROMETHEUS_URL}}"
+									],
+									"path": [
+										"-",
+										"ready"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "2. Metrics",
+					"item": [
+						{
+							"name": "memstats",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROMETHEUS_URL}}/api/v1/query?query=go_memstats_frees_total{exporter=\"8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5\"}",
+									"host": [
+										"{{PROMETHEUS_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"query"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "go_memstats_frees_total{exporter=\"8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5\"}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "memstats Copy 2",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROMETHEUS_URL}}/api/v1/query?query=promhttp_metric_handler_requests_total{exporter=\"8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5\",code=\"200\"}",
+									"host": [
+										"{{PROMETHEUS_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"query"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "promhttp_metric_handler_requests_total{exporter=\"8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5\",code=\"200\"}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "memstats Copy 3",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROMETHEUS_URL}}/api/v1/query?query=promhttp_metric_handler_requests_total{code=\"200\",exporter=\"c9bb3e99-df72-4603-b188-b6f856f0ef9f\"}",
+									"host": [
+										"{{PROMETHEUS_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"query"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "promhttp_metric_handler_requests_total{code=\"200\",exporter=\"c9bb3e99-df72-4603-b188-b6f856f0ef9f\"}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "memstats Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROMETHEUS_URL}}/api/v1/query?query=go_memstats_frees_total{exporter=\"8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5\"}&query=process_cpu_seconds_total{exporter=\"8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5\"}",
+									"host": [
+										"{{PROMETHEUS_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"query"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "go_memstats_frees_total{exporter=\"8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5\"}"
+										},
+										{
+											"key": "query",
+											"value": "process_cpu_seconds_total{exporter=\"8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5\"}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "memstats Copy 4",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROMETHEUS_URL}}/api/v1/query?query=go_memstats_frees_total{owner=\"4d365568-d3ac-4880-8403-8d4e2638e008\"}",
+									"host": [
+										"{{PROMETHEUS_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"query"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "go_memstats_frees_total{owner=\"4d365568-d3ac-4880-8403-8d4e2638e008\"}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": null
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "2. Backend",
+			"item": [
+				{
+					"name": "1. Login",
+					"item": [
+						{
+							"name": "Login User 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+											"});",
+											"pm.environment.set(\"USER_1_JWT\",pm.response.text())"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER_URL}}/login?login={{USER1_LOGIN}}&pass={{USER1_PASS}}&UUID={{USER1_UUID}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"login"
+									],
+									"query": [
+										{
+											"key": "login",
+											"value": "{{USER1_LOGIN}}"
+										},
+										{
+											"key": "pass",
+											"value": "{{USER1_PASS}}"
+										},
+										{
+											"key": "UUID",
+											"value": "{{USER1_UUID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login User 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+											"});",
+											"pm.environment.set(\"USER_2_JWT\",pm.response.json())"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER_URL}}/login?login={{USER2_LOGIN}}&pass={{USER2_PASS}}&UUID={{USER2_UUID}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"login"
+									],
+									"query": [
+										{
+											"key": "login",
+											"value": "{{USER2_LOGIN}}"
+										},
+										{
+											"key": "pass",
+											"value": "{{USER2_PASS}}"
+										},
+										{
+											"key": "UUID",
+											"value": "{{USER2_UUID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test Auth User 1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER_1_JWT}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER_URL}}/JWTAuthTest",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"JWTAuthTest"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test Auth User 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER_2_JWT}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER_URL}}/JWTAuthTest",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"JWTAuthTest"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "2. query",
+					"item": [
+						{
+							"name": "1.",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER_1_JWT}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER_URL}}/query?datas=go_memstats_frees_total&exporters=8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"query"
+									],
+									"query": [
+										{
+											"key": "datas",
+											"value": "go_memstats_frees_total"
+										},
+										{
+											"key": "exporters",
+											"value": "8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1. Copy 3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER_1_JWT}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER_URL}}/query?exporter=8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"query"
+									],
+									"query": [
+										{
+											"key": "exporter",
+											"value": "8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1. Copy 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER_1_JWT}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER_URL}}/query?datas=go_memstats_frees_total&owner={{USER1_UUID}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"query"
+									],
+									"query": [
+										{
+											"key": "datas",
+											"value": "go_memstats_frees_total"
+										},
+										{
+											"key": "owner",
+											"value": "{{USER1_UUID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1. Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER_1_JWT}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER_URL}}/query?datas=go_memstats_frees_total&exporters=8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"query"
+									],
+									"query": [
+										{
+											"key": "datas",
+											"value": "go_memstats_frees_total"
+										},
+										{
+											"key": "exporters",
+											"value": "8d4c8325-a1c6-4bb1-b50d-dc7f7d92a5b5"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Health",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/health",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
