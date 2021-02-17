@@ -35,7 +35,7 @@ func (h *BaseController) GetUser(login, password string) (*models.User, error) {
 	return user, nil
 }
 
-func (h *BaseController) getExportersFromUserID(user *models.User) ([]models.Exporter, error) {
+func (h *BaseController) GetExportersFromUser(user *models.User) ([]models.Exporter, error) {
 	exporters, err := user.FindExporters(h.Db.DB)
 	if err != nil {
 		return nil, err

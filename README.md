@@ -103,3 +103,4 @@ Small Cli to quickly test api outside Postman.
   - Schema on Cloud Architecture
 - 17/02/2021 (1 hour)
   - Gitlab Repository, README and Pull request
+  - "query/{exporterUUID}": Checking if exported uuid is an among user's exporters uuid
